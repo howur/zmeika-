@@ -1,3 +1,5 @@
+import random
+import time 
 import turtle
 
 delay = 0.1
@@ -16,6 +18,8 @@ zmeika.goto(0, 0)
 zmeika.direction = "Stop"
 
 
+
+
 pen = turtle.Turtle()
 pen.speed(0)
 pen.shape("square")
@@ -25,13 +29,6 @@ pen.hideturtle()
 pen.goto(0, 250)
 pen.write("Score: 0 Snake№2 score: 0 ", align="center",
 		font=("candara", 24, "bold"))
-
-		
-screen.listen()
-screen.onkeypress(goup, "w")
-screen.onkeypress(godown, "s")
-screen.onkeypress(goleft, "a")
-screen.onkeypress(goright, "d")
 
 def godown():
 	if zmeika.direction != "up":
@@ -62,6 +59,14 @@ def move():
 	if zmeika.direction == "right":
 		x = zmeika.xcor()
 		zmeika.setx(x+20)
+		
+screen.listen()
+screen.onkeypress(goup, "w")
+screen.onkeypress(godown, "s")
+screen.onkeypress(goleft, "a")
+screen.onkeypress(goright, "d")
+
+
 
 
 # Main Gameplay
