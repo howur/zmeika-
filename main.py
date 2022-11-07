@@ -30,6 +30,16 @@ pen.goto(0, 250)
 pen.write("Score: 0 Snake№2 score: 0 ", align="center",
 		font=("candara", 24, "bold"))
 
+food = turtle.Turtle()
+color = random.choice(["yellow","red","blue"])
+shape = random.choice(['arrow', 'turtle', 'circle', 'square', 'triangle', 'classic'])
+food.speed(0)
+food.color(color)
+food.shape("square")
+food.penup()
+food.goto(0,100)
+
+ 
 def godown():
 	if zmeika.direction != "up":
 		zmeika.direction = "down"
@@ -66,6 +76,11 @@ screen.onkeypress(godown, "s")
 screen.onkeypress(goleft, "a")
 screen.onkeypress(goright, "d")
 
+# сложности с обработкой нажатий на русские буквы, т.к. _tkinter.TclError: bad event type or keysym "ц"
+# screen.onkeypress(goup, "ц")
+# screen.onkeypress(godown, "ы")
+# screen.onkeypress(goleft, "ф")
+# screen.onkeypress(goright, "в")
 
 
 
