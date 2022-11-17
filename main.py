@@ -87,22 +87,36 @@ screen.onkeypress(goright, "d")
 # Main Gameplay
 while True:
 	screen.update()
-	if zmeika.xcor() > 290 or zmeika.xcor() < -290 or zmeika.ycor() > 290 or zmeika.ycor() < -290:
-		# time.sleep(1)
-		zmeika.goto(0, 0)
-		zmeika.direction = "Stop"
-		colors = random.choice(['red', 'blue', 'green'])
-		shapes = random.choice(['square', 'circle'])
-		# for segment in segments1:
-		# 	segment.goto(1000, 1000)
-		# segments1.clear()
-		# score = 0
-		delay = 0.1
-		pen.clear()
-		# pen.write("Score: {} Snake№2 score: {} ".format(
-		# 	score1, score2), align="center", font=("candara", 24, "bold"))
+	# if zmeika.xcor() > 290 or zmeika.xcor() < -290 or zmeika.ycor() > 290 or zmeika.ycor() < -290:
+	# 	# time.sleep(1)
+	# 	zmeika.goto(0, 0)
+	# 	zmeika.direction = "Stop"
+	# 	colors = random.choice(['red', 'blue', 'green'])
+	# 	shapes = random.choice(['square', 'circle'])
+	# 	# for segment in segments1:
+	# 	# 	segment.goto(1000, 1000)
+	# 	# segments1.clear()
+	# 	# score = 0
+	# 	delay = 0.1
+	# 	pen.clear()
+	# 	# pen.write("Score: {} Snake№2 score: {} ".format(
+	# 	# 	score1, score2), align="center", font=("candara", 24, "bold"))
+	if zmeika.xcor() > 290:
+		zmeika.goto(-290, zmeika.ycor()) 
+  
+	if zmeika.xcor() < -290:
+		zmeika.goto(290, zmeika.ycor())
+
+
+	if zmeika.ycor() < -290:
+		zmeika.goto(zmeika.xcor(), 290)
+  
+	if zmeika.ycor() > 290:
+		zmeika.goto(zmeika.xcor(), -290)
+
 
 	
+  	
 
 	# if zmeika.distance(food) < 20:
 	# 	x = random.randint(-270, 270)
