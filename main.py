@@ -3,6 +3,7 @@ import time
 import turtle
 
 delay = 0.1
+score = 0
 
 screen = turtle.Screen()
 screen.title("zmeika") # nazvaniye
@@ -39,6 +40,7 @@ food.shape("square")
 food.penup()
 food.goto(0,100)
 
+ 
  
 def godown():
 	if zmeika.direction != "up":
@@ -82,7 +84,7 @@ screen.onkeypress(goright, "d")
 # screen.onkeypress(goleft, "ф")
 # screen.onkeypress(goright, "в")
 
-
+tail = []
 
 # Main Gameplay
 while True:
@@ -93,20 +95,21 @@ while True:
 	# 	zmeika.direction = "Stop"
 	# 	colors = random.choice(['red', 'blue', 'green'])
 	# 	shapes = random.choice(['square', 'circle'])
-	# 	# for segment in segments1:
+	# 	# for segment in tail:
 	# 	# 	segment.goto(1000, 1000)
-	# 	# segments1.clear()
+	# 	# tail.clear()
 	# 	# score = 0
 	# 	delay = 0.1
 	# 	pen.clear()
 	# 	# pen.write("Score: {} Snake№2 score: {} ".format(
 	# 	# 	score1, score2), align="center", font=("candara", 24, "bold"))
+	
+	# walk throw the walls
 	if zmeika.xcor() > 290:
-		zmeika.goto(-290, zmeika.ycor()) 
-  
+		zmeika.goto(-290, zmeika.ycor())
+ 
 	if zmeika.xcor() < -290:
 		zmeika.goto(290, zmeika.ycor())
-
 
 	if zmeika.ycor() < -290:
 		zmeika.goto(zmeika.xcor(), 290)
@@ -114,30 +117,32 @@ while True:
 	if zmeika.ycor() > 290:
 		zmeika.goto(zmeika.xcor(), -290)
 
+	# make food
+	if zmeika.distance(food) < 25:
+		x = random.randint(-270, 270)
+		y = random.randint(-270, 270)
+		food.goto(x, y)
+		# Adding segment
+		new_segment = turtle.Turtle()
 
+		new_segment.speed(0)
+		new_segment.shape("square")
+		new_segment.color("orange") # tail colour
 	
-  	
+		new_segment.penup()
+		tail.append(new_segment)
+		# delay -= 0.001
+		score += 10
+		# if score > high_score:
+		#	high_score = score
+		pen.clear()
+		pen.write("Score: {}".format(
+			score), align="center", font=("candara", 24, "bold"))
 
-	# if zmeika.distance(food) < 20:
-	# 	x = random.randint(-270, 270)
-	# 	y = random.randint(-270, 270)
-	# 	food.goto(x, y)
-
-	# 	# Adding segment
-	# 	new_segment = turtle.Turtle()
-	# 	new_segment.speed(0)
-	# 	new_segment.shape("square")
-	# 	new_segment.color("orange") # tail colour
-	# 	new_segment.penup()
-	# 	segments1.append(new_segment)
-	# 	delay -= 0.001
-	# 	score1 += 10
-	# 	# if score > high_score:
-	# 	# 	high_score = score
-	# 	pen.clear()
-	# 	pen.write("Score: {} Score: {} ".format(
-	# 		score1, score2), align="center", font=("candara", 24, "bold"))
-
+	for index in range(len(tail)-1, 0, -1):  
+		x = tail[index-1].xcor() # ctrl+D - videlenie
+		y = tail[index-1].ycor()
+		tail[index].goto(x, y)
 
 	# # Checking for head collisions with body segments
 	# for index in range(len(segments1)-1, 0, -1):
@@ -151,7 +156,7 @@ while True:
 
 	move()
 
-	# for segment in segments1:
+	# for segment in tails:
 	# 	if segment.distance(zmeika) < 20:
 	# 		# time.sleep(1)
 	# 		zmeika.goto(0, 0)
